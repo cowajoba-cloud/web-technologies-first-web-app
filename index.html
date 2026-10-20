@@ -6,17 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My First Web App</title>
 </head>
-<body>
-    <h1>Welcome to My First Web App</h1>
+
+<body style="font-family: Arial, sans-serif; background-color: #f3f6fb; color: #243247; line-height: 1.6; padding: 20px;">
+
+    <h1 style="color: #174ea6; font-size: 32px;">
+        Welcome to My First Web App
+    </h1>
 
     <p>I am learning how to build web applications using HTML.</p>
 
-    <button onclick="alert('Hello! My first web app works.')">
+    <button
+        type="button"
+        onclick="alert('Hello! My first web app works.')"
+        style="background-color: #174ea6; color: white; padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer;">
         Click Me
     </button>
 
-    <section>
-        <h2>About Me</h2>
+    <section style="margin-top: 24px;">
+        <h2 style="color: #174ea6;">About Me</h2>
 
         <p>
             My name is Charles Owajoba. I am studying
@@ -30,8 +37,8 @@
         </p>
     </section>
 
-    <section>
-        <h2>My Technical Interests</h2>
+    <section style="margin-top: 24px;">
+        <h2 style="color: #174ea6;">My Technical Interests</h2>
 
         <ul>
             <li>Cybersecurity</li>
@@ -41,8 +48,8 @@
         </ul>
     </section>
 
-    <section>
-        <h2>My Learning Goals</h2>
+    <section style="margin-top: 24px;">
+        <h2 style="color: #174ea6;">My Learning Goals</h2>
 
         <p>
             I am developing my skills in web technologies,
@@ -55,10 +62,14 @@
         </p>
 
         <p>
-            <a href="https://www.w3schools.com/html/">
+            <a href="https://www.w3schools.com/html/"
+               target="_blank"
+               rel="noopener noreferrer"
+               style="color: #174ea6;">
                 Explore the W3Schools HTML tutorial
             </a>
         </p>
     </section>
+
 </body>
 </html>
