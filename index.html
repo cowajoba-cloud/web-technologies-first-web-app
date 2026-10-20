@@ -1,10 +1,10 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A responsive personal web application demonstrating HTML, CSS, forms and JavaScript.">
+    <meta name="description" content="My first web application demonstrating HTML, responsive CSS, JavaScript, forms and API integration.">
     <title>My First Web App</title>
 
     <style>
@@ -38,16 +38,12 @@
             font-size: 2rem;
         }
 
-        header button {
-            background-color: white;
-            color: #174ea6;
-        }
-
         section {
             background-color: white;
             margin-top: 20px;
             padding: 20px;
             border-radius: 10px;
+            overflow-wrap: anywhere;
         }
 
         h2 {
@@ -62,11 +58,15 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 1rem;
-            font-family: inherit;
         }
 
         button:hover {
-            background-color: #123b80;
+            background-color: #103b80;
+        }
+
+        button:disabled {
+            opacity: 0.65;
+            cursor: wait;
         }
 
         button:focus-visible,
@@ -83,76 +83,80 @@
             overflow-wrap: anywhere;
         }
 
-        .form-group {
-            margin: 18px 0;
-        }
-
-        .form-group > label,
-        .form-group legend {
+        label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: bold;
+            margin: 14px 0 6px;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group select,
-        .form-group textarea {
+        input, select, textarea {
             display: block;
             width: 100%;
             padding: 12px;
-            border: 1px solid #9aa9bd;
+            border: 1px solid #9aabc4;
             border-radius: 6px;
-            background-color: white;
-            color: #243247;
             font: inherit;
+            color: #243247;
+            background-color: white;
         }
 
-        .form-group textarea {
+        textarea {
+            min-height: 130px;
             resize: vertical;
         }
 
-        fieldset.form-group {
-            border: 1px solid #c5cfdd;
+        fieldset {
+            border: 1px solid #c7d3e5;
             border-radius: 6px;
+            margin: 18px 0;
             padding: 12px;
         }
 
-        .radio-label,
-        .checkbox-label {
-            display: inline-flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin: 6px 12px 6px 0;
+        legend {
+            font-weight: bold;
+            padding: 0 6px;
         }
 
-        .radio-label input,
-        .checkbox-label input {
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .radio-option input,
+        .checkbox-option input {
+            width: auto;
             margin-top: 6px;
         }
 
-        .submit-button {
-            margin-top: 12px;
-            min-height: 44px;
-        }
-
-        #form-status,
-        #break-result {
-            font-weight: 600;
-            overflow-wrap: anywhere;
-        }
-
-        .tool-panel {
+        .result-panel {
             background-color: #edf3ff;
             border-left: 4px solid #174ea6;
             padding: 16px;
-            border-radius: 6px;
             margin-top: 16px;
+            border-radius: 6px;
+        }
+
+        .api-image {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            max-height: 500px;
+            object-fit: contain;
+            margin-top: 16px;
+            border-radius: 10px;
+        }
+
+        .error-message {
+            color: #a12622;
+            font-weight: bold;
         }
 
         footer {
-            padding: 12px 0;
             text-align: center;
+            padding: 20px 0;
         }
 
         @media (max-width: 600px) {
@@ -173,9 +177,7 @@
                 margin-top: 14px;
             }
 
-            header button,
-            .submit-button,
-            #suggest-break {
+            button {
                 width: 100%;
                 min-height: 44px;
             }
@@ -196,14 +198,8 @@
     <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>
-                My name is Charles Owajoba. I am studying Computer Science
-                with Software Engineering at Sheffield Hallam University.
-            </p>
-            <p>
-                My interests include cybersecurity, cloud computing
-                and secure software development.
-            </p>
+            <p>My name is Charles Owajoba. I am studying Computer Science with Software Engineering at Sheffield Hallam University.</p>
+            <p>My interests include cybersecurity, cloud computing and secure software development.</p>
         </section>
 
         <section id="interests">
@@ -216,20 +212,13 @@
             </ul>
         </section>
 
-        <section id="learning-goals">
+        <section id="goals">
             <h2>My Learning Goals</h2>
-            <p>
-                I am developing my skills in web technologies,
-                secure software engineering and cybersecurity.
-            </p>
-            <p>
-                I want to understand how websites are structured,
-                tested and deployed securely.
-            </p>
+            <p>I am developing my skills in web technologies, secure software engineering and cybersecurity.</p>
+            <p>I want to understand how websites are structured, tested and deployed securely.</p>
             <p>
                 <a href="https://www.w3schools.com/html/"
-                   target="_blank"
-                   rel="noopener noreferrer">
+                   target="_blank" rel="noopener noreferrer">
                     Explore the W3Schools HTML tutorial
                 </a>
             </p>
@@ -237,123 +226,127 @@
 
         <section id="break-tool">
             <h2>Take a Break</h2>
+            <p>Choose how much time you have available and receive a suggested break activity.</p>
+
+            <label for="break-duration">Available break time</label>
+            <select id="break-duration">
+                <option value="2">2 minutes</option>
+                <option value="5" selected>5 minutes</option>
+                <option value="10">10 minutes</option>
+            </select>
+
             <p>
-                Choose how much time you have available and receive
-                a suggested break activity.
+                <button type="button" id="suggest-break">
+                    Suggest a Break
+                </button>
             </p>
 
-            <div class="form-group">
-                <label for="break-duration">Available break time</label>
-                <select id="break-duration">
-                    <option value="2">2 minutes</option>
-                    <option value="5" selected>5 minutes</option>
-                    <option value="10">10 minutes</option>
-                </select>
+            <div class="result-panel" aria-live="polite">
+                <p id="break-result">Your break suggestion will appear here.</p>
+                <p id="break-count">Suggestions displayed: 0</p>
             </div>
+        </section>
 
-            <button type="button" id="suggest-break">
-                Suggest a Break
+        <section id="api-demo">
+            <h2>Random Dog Picture — API Demonstration</h2>
+            <p>
+                This feature connects to a public API to request a random dog picture.
+                It demonstrates how JavaScript can retrieve JSON data and update a webpage.
+            </p>
+
+            <button type="button" id="load-dog">
+                Get a Random Dog
             </button>
 
-            <div class="tool-panel">
-                <p id="break-result" role="status" aria-live="polite">
-                    Your break suggestion will appear here.
-                </p>
-                <p id="suggestion-count">Suggestions displayed: 0</p>
-            </div>
+            <p id="api-status" role="status" aria-live="polite">
+                Select the button to request a picture.
+            </p>
+
+            <img
+                id="dog-image"
+                class="api-image"
+                alt="A random dog picture returned by the API"
+                hidden
+            />
+
+            <p>
+                API source:
+                <a href="https://dog.ceo/dog-api/"
+                   target="_blank" rel="noopener noreferrer">
+                    Dog CEO public API documentation
+                </a>
+            </p>
         </section>
 
         <section id="contact">
             <h2>Contact Me</h2>
             <p>
-                Complete this demonstration form to practise HTML forms
-                and JavaScript validation. Your information will not be
-                sent to a server or stored.
+                Complete this demonstration form to practise HTML forms and browser-based
+                validation. Your information will not be sent to a server or stored.
             </p>
 
             <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">Full name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your full name"
-                        minlength="2"
-                        maxlength="60"
-                        autocomplete="name"
-                        required>
-                </div>
+                <label for="full-name">Full name</label>
+                <input
+                    type="text"
+                    id="full-name"
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                    minlength="2"
+                    maxlength="80"
+                >
 
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        autocomplete="email"
-                        required>
-                </div>
+                <label for="email">Email address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
 
-                <div class="form-group">
-                    <label for="reason">Reason for contact</label>
-                    <select id="reason" name="reason" required>
-                        <option value="">Please select</option>
-                        <option value="web-development">Web development</option>
-                        <option value="cybersecurity">Cybersecurity</option>
-                        <option value="cloud-computing">Cloud computing</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
+                <label for="contact-reason">Reason for contact</label>
+                <select id="contact-reason" name="reason" required>
+                    <option value="">Please select</option>
+                    <option value="web-development">Web development</option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                    <option value="cloud-computing">Cloud computing</option>
+                    <option value="other">Other</option>
+                </select>
 
-                <fieldset class="form-group">
+                <fieldset>
                     <legend>Preferred contact method</legend>
 
-                    <label class="radio-label">
-                        <input
-                            type="radio"
-                            name="contact-method"
-                            value="email"
-                            required>
-                        Email
+                    <label class="radio-option">
+                        <input type="radio" name="contactMethod" value="email" required>
+                        <span>Email</span>
                     </label>
 
-                    <label class="radio-label">
-                        <input
-                            type="radio"
-                            name="contact-method"
-                            value="phone">
-                        Phone
+                    <label class="radio-option">
+                        <input type="radio" name="contactMethod" value="phone">
+                        <span>Phone</span>
                     </label>
                 </fieldset>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        minlength="10"
-                        maxlength="500"
-                        placeholder="Write at least 10 characters"
-                        required></textarea>
-                </div>
+                <label for="message">Message</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Write at least 10 characters"
+                    required
+                    minlength="10"
+                    maxlength="1000"
+                ></textarea>
 
-                <div class="form-group">
-                    <label class="checkbox-label" for="confirmation">
-                        <input
-                            type="checkbox"
-                            id="confirmation"
-                            name="confirmation"
-                            required>
-                        I confirm that the information entered is correct.
-                    </label>
-                </div>
+                <label class="checkbox-option">
+                    <input type="checkbox" id="confirm-details" required>
+                    <span>I confirm that the information entered is correct.</span>
+                </label>
 
-                <button type="submit" class="submit-button">
-                    Validate Form
-                </button>
+                <button type="submit">Validate Form</button>
 
                 <p id="form-status" role="status" aria-live="polite"></p>
             </form>
@@ -372,16 +365,148 @@
             alert("Hello! My first web app works.");
         });
 
-        // Feature 2: Suggest a break based on the user's selection.
+        // Feature 2: Suggest a break based on the selected duration.
         const breakDuration = document.getElementById("break-duration");
         const suggestBreakButton = document.getElementById("suggest-break");
         const breakResult = document.getElementById("break-result");
-        const suggestionCount = document.getElementById("suggestion-count");
+        const breakCount = document.getElementById("break-count");
 
         let totalSuggestions = 0;
         let previousSuggestion = "";
 
         const breakSuggestions = {
             2: [
-                "Stand up, stretch gently and relax your shoulders.",
-                "Look away from the screen
+                "Stand up and gently stretch your shoulders.",
+                "Look away from the screen and focus on a distant object.",
+                "Take a few slow, comfortable breaths."
+            ],
+            5: [
+                "Take a short walk and stretch your legs.",
+                "Drink some water and rest your eyes.",
+                "Step away from your desk and relax for a few minutes."
+            ],
+            10: [
+                "Take a ten-minute walk if it is safe to do so.",
+                "Prepare a drink and take a screen-free break.",
+                "Do some gentle stretches and return when you feel ready."
+            ]
+        };
+
+        suggestBreakButton.addEventListener("click", function () {
+            const duration = breakDuration.value;
+            const options = breakSuggestions[duration];
+
+            let suggestion;
+
+            // Avoid repeating the previous suggestion when alternatives exist.
+            const alternatives = options.filter(function (item) {
+                return item !== previousSuggestion;
+            });
+
+            const availableOptions = alternatives.length > 0
+                ? alternatives
+                : options;
+
+            suggestion = availableOptions[
+                Math.floor(Math.random() * availableOptions.length)
+            ];
+
+            previousSuggestion = suggestion;
+            totalSuggestions += 1;
+
+            breakResult.textContent =
+                duration + "-minute break: " + suggestion;
+
+            breakCount.textContent =
+                "Suggestions displayed: " + totalSuggestions;
+        });
+
+        // Feature 3: Fetch a random dog picture from a public API.
+        const dogButton = document.getElementById("load-dog");
+        const dogImage = document.getElementById("dog-image");
+        const apiStatus = document.getElementById("api-status");
+
+        dogButton.addEventListener("click", async function () {
+            dogButton.disabled = true;
+            apiStatus.classList.remove("error-message");
+            apiStatus.textContent = "Loading a dog picture...";
+            dogImage.hidden = true;
+
+            try {
+                const response = await fetch(
+                    "https://dog.ceo/api/breeds/image/random"
+                );
+
+                if (!response.ok) {
+                    throw new Error("The API request failed.");
+                }
+
+                const data = await response.json();
+
+                if (
+                    data.status !== "success" ||
+                    typeof data.message !== "string"
+                ) {
+                    throw new Error("The API response was not valid.");
+                }
+
+                // Only accept HTTPS image URLs from the expected API host.
+                const imageUrl = new URL(data.message);
+
+                if (
+                    imageUrl.protocol !== "https:" ||
+                    imageUrl.hostname !== "images.dog.ceo"
+                ) {
+                    throw new Error("The API returned an unexpected image URL.");
+                }
+
+                dogImage.onload = function () {
+                    dogImage.hidden = false;
+                    apiStatus.textContent =
+                        "Dog picture loaded successfully.";
+                };
+
+                dogImage.onerror = function () {
+                    dogImage.hidden = true;
+                    apiStatus.classList.add("error-message");
+                    apiStatus.textContent =
+                        "The picture could not be displayed. Please try again.";
+                };
+
+                dogImage.src = imageUrl.href;
+            } catch (error) {
+                dogImage.hidden = true;
+                apiStatus.classList.add("error-message");
+                apiStatus.textContent =
+                    "Unable to load a dog picture. Check your connection and try again.";
+
+                console.error("Dog API error:", error);
+            } finally {
+                dogButton.disabled = false;
+            }
+        });
+
+        // Feature 4: Validate the contact form in the browser.
+        // This demonstration does not send or save form data.
+        const contactForm = document.getElementById("contact-form");
+        const formStatus = document.getElementById("form-status");
+
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            formStatus.classList.remove("error-message");
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                formStatus.textContent =
+                    "Please correct the highlighted fields and try again.";
+                formStatus.classList.add("error-message");
+                return;
+            }
+
+            formStatus.textContent =
+                "Validation successful. This demonstration does not send or store your information.";
+        });
+    </script>
+</body>
+</html>
