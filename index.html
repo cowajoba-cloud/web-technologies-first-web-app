@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="My first web application exploring HTML, responsive CSS, accessibility and form validation.">
+    <meta name="description" content="A responsive personal web application demonstrating HTML, CSS, forms and JavaScript.">
     <title>My First Web App</title>
 
     <style>
@@ -83,7 +83,6 @@
             overflow-wrap: anywhere;
         }
 
-        /* Contact form styling */
         .form-group {
             margin: 18px 0;
         }
@@ -104,7 +103,7 @@
             padding: 12px;
             border: 1px solid #9aa9bd;
             border-radius: 6px;
-            background-color: #fff;
+            background-color: white;
             color: #243247;
             font: inherit;
         }
@@ -137,9 +136,18 @@
             min-height: 44px;
         }
 
-        #form-status {
+        #form-status,
+        #break-result {
             font-weight: 600;
             overflow-wrap: anywhere;
+        }
+
+        .tool-panel {
+            background-color: #edf3ff;
+            border-left: 4px solid #174ea6;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 16px;
         }
 
         footer {
@@ -147,7 +155,6 @@
             text-align: center;
         }
 
-        /* Responsive layout for smaller screens */
         @media (max-width: 600px) {
             body {
                 padding: 12px;
@@ -167,13 +174,10 @@
             }
 
             header button,
-            .submit-button {
+            .submit-button,
+            #suggest-break {
                 width: 100%;
                 min-height: 44px;
-            }
-
-            .radio-label {
-                margin-right: 8px;
             }
         }
     </style>
@@ -182,11 +186,9 @@
 <body>
     <header>
         <h1>Welcome to My First Web App</h1>
-
         <p>I am learning how to build web applications using HTML.</p>
 
-        <button type="button"
-            onclick="alert('Hello! My first web app works.')">
+        <button type="button" id="greeting-button">
             Click Me
         </button>
     </header>
@@ -194,12 +196,10 @@
     <main>
         <section id="about">
             <h2>About Me</h2>
-
             <p>
                 My name is Charles Owajoba. I am studying Computer Science
                 with Software Engineering at Sheffield Hallam University.
             </p>
-
             <p>
                 My interests include cybersecurity, cloud computing
                 and secure software development.
@@ -208,7 +208,6 @@
 
         <section id="interests">
             <h2>My Technical Interests</h2>
-
             <ul>
                 <li>Cybersecurity</li>
                 <li>Web Development</li>
@@ -219,17 +218,14 @@
 
         <section id="learning-goals">
             <h2>My Learning Goals</h2>
-
             <p>
                 I am developing my skills in web technologies,
                 secure software engineering and cybersecurity.
             </p>
-
             <p>
                 I want to understand how websites are structured,
                 tested and deployed securely.
             </p>
-
             <p>
                 <a href="https://www.w3schools.com/html/"
                    target="_blank"
@@ -239,13 +235,40 @@
             </p>
         </section>
 
+        <section id="break-tool">
+            <h2>Take a Break</h2>
+            <p>
+                Choose how much time you have available and receive
+                a suggested break activity.
+            </p>
+
+            <div class="form-group">
+                <label for="break-duration">Available break time</label>
+                <select id="break-duration">
+                    <option value="2">2 minutes</option>
+                    <option value="5" selected>5 minutes</option>
+                    <option value="10">10 minutes</option>
+                </select>
+            </div>
+
+            <button type="button" id="suggest-break">
+                Suggest a Break
+            </button>
+
+            <div class="tool-panel">
+                <p id="break-result" role="status" aria-live="polite">
+                    Your break suggestion will appear here.
+                </p>
+                <p id="suggestion-count">Suggestions displayed: 0</p>
+            </div>
+        </section>
+
         <section id="contact">
             <h2>Contact Me</h2>
-
             <p>
                 Complete this demonstration form to practise HTML forms
-                and browser-based validation. Your information will not
-                be sent to a server or stored.
+                and JavaScript validation. Your information will not be
+                sent to a server or stored.
             </p>
 
             <form id="contact-form">
@@ -342,21 +365,23 @@
     </footer>
 
     <script>
-        const contactForm = document.getElementById("contact-form");
-        const formStatus = document.getElementById("form-status");
+        // Feature 1: Respond to a button click.
+        const greetingButton = document.getElementById("greeting-button");
 
-        contactForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            if (!contactForm.checkValidity()) {
-                contactForm.reportValidity();
-                return;
-            }
-
-            formStatus.textContent =
-                "Form validation successful. This is a demonstration only; no information was sent or stored.";
+        greetingButton.addEventListener("click", function () {
+            alert("Hello! My first web app works.");
         });
-    </script>
-</body>
-</html>
-```
+
+        // Feature 2: Suggest a break based on the user's selection.
+        const breakDuration = document.getElementById("break-duration");
+        const suggestBreakButton = document.getElementById("suggest-break");
+        const breakResult = document.getElementById("break-result");
+        const suggestionCount = document.getElementById("suggestion-count");
+
+        let totalSuggestions = 0;
+        let previousSuggestion = "";
+
+        const breakSuggestions = {
+            2: [
+                "Stand up, stretch gently and relax your shoulders.",
+                "Look away from the screen
