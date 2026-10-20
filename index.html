@@ -1,9 +1,10 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My first web application exploring HTML, responsive CSS, accessibility and form validation.">
     <title>My First Web App</title>
 
     <style>
@@ -37,6 +38,11 @@
             font-size: 2rem;
         }
 
+        header button {
+            background-color: white;
+            color: #174ea6;
+        }
+
         section {
             background-color: white;
             margin-top: 20px;
@@ -56,9 +62,18 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 1rem;
+            font-family: inherit;
         }
 
-        button:focus-visible, a:focus-visible {
+        button:hover {
+            background-color: #123b80;
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
             outline: 3px solid #d97706;
             outline-offset: 3px;
         }
@@ -66,6 +81,70 @@
         a {
             color: #174ea6;
             overflow-wrap: anywhere;
+        }
+
+        /* Contact form styling */
+        .form-group {
+            margin: 18px 0;
+        }
+
+        .form-group > label,
+        .form-group legend {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #9aa9bd;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #243247;
+            font: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        fieldset.form-group {
+            border: 1px solid #c5cfdd;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .radio-label,
+        .checkbox-label {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 6px 12px 6px 0;
+        }
+
+        .radio-label input,
+        .checkbox-label input {
+            margin-top: 6px;
+        }
+
+        .submit-button {
+            margin-top: 12px;
+            min-height: 44px;
+        }
+
+        #form-status {
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            padding: 12px 0;
+            text-align: center;
         }
 
         /* Responsive layout for smaller screens */
@@ -87,9 +166,14 @@
                 margin-top: 14px;
             }
 
-            button {
+            header button,
+            .submit-button {
                 width: 100%;
                 min-height: 44px;
+            }
+
+            .radio-label {
+                margin-right: 8px;
             }
         }
     </style>
@@ -98,7 +182,9 @@
 <body>
     <header>
         <h1>Welcome to My First Web App</h1>
+
         <p>I am learning how to build web applications using HTML.</p>
+
         <button type="button"
             onclick="alert('Hello! My first web app works.')">
             Click Me
@@ -106,14 +192,23 @@
     </header>
 
     <main>
-        <section>
+        <section id="about">
             <h2>About Me</h2>
-            <p>My name is Charles Owajoba. I am studying Computer Science with Software Engineering at Sheffield Hallam University.</p>
-            <p>My interests include cybersecurity, cloud computing and secure software development.</p>
+
+            <p>
+                My name is Charles Owajoba. I am studying Computer Science
+                with Software Engineering at Sheffield Hallam University.
+            </p>
+
+            <p>
+                My interests include cybersecurity, cloud computing
+                and secure software development.
+            </p>
         </section>
 
-        <section>
+        <section id="interests">
             <h2>My Technical Interests</h2>
+
             <ul>
                 <li>Cybersecurity</li>
                 <li>Web Development</li>
@@ -122,21 +217,146 @@
             </ul>
         </section>
 
-        <section>
+        <section id="learning-goals">
             <h2>My Learning Goals</h2>
-            <p>I am developing my skills in web technologies, secure software engineering and cybersecurity.</p>
-            <p>I want to understand how websites are structured, tested and deployed securely.</p>
+
+            <p>
+                I am developing my skills in web technologies,
+                secure software engineering and cybersecurity.
+            </p>
+
+            <p>
+                I want to understand how websites are structured,
+                tested and deployed securely.
+            </p>
+
             <p>
                 <a href="https://www.w3schools.com/html/"
-                   target="_blank" rel="noopener noreferrer">
+                   target="_blank"
+                   rel="noopener noreferrer">
                     Explore the W3Schools HTML tutorial
                 </a>
             </p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+
+            <p>
+                Complete this demonstration form to practise HTML forms
+                and browser-based validation. Your information will not
+                be sent to a server or stored.
+            </p>
+
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Full name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        minlength="2"
+                        maxlength="60"
+                        autocomplete="name"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Reason for contact</label>
+                    <select id="reason" name="reason" required>
+                        <option value="">Please select</option>
+                        <option value="web-development">Web development</option>
+                        <option value="cybersecurity">Cybersecurity</option>
+                        <option value="cloud-computing">Cloud computing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <fieldset class="form-group">
+                    <legend>Preferred contact method</legend>
+
+                    <label class="radio-label">
+                        <input
+                            type="radio"
+                            name="contact-method"
+                            value="email"
+                            required>
+                        Email
+                    </label>
+
+                    <label class="radio-label">
+                        <input
+                            type="radio"
+                            name="contact-method"
+                            value="phone">
+                        Phone
+                    </label>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        minlength="10"
+                        maxlength="500"
+                        placeholder="Write at least 10 characters"
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label" for="confirmation">
+                        <input
+                            type="checkbox"
+                            id="confirmation"
+                            name="confirmation"
+                            required>
+                        I confirm that the information entered is correct.
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    Validate Form
+                </button>
+
+                <p id="form-status" role="status" aria-live="polite"></p>
+            </form>
         </section>
     </main>
 
     <footer>
         <p>My first web application — Web Technologies practice.</p>
     </footer>
+
+    <script>
+        const contactForm = document.getElementById("contact-form");
+        const formStatus = document.getElementById("form-status");
+
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            formStatus.textContent =
+                "Form validation successful. This is a demonstration only; no information was sent or stored.";
+        });
+    </script>
 </body>
 </html>
+```
